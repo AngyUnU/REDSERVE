@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina ejemplo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 56px; /* Altura de la barra de navegacion */
+        }
+
+        .slidebar {
+            position: fixed;
+            top: 56px;
+            left: 0;
+            bottom: 0;
+            width: 250px;
+            padding-top: 50px;
+            background-color: #f8f9fa;
+        }
+
+        .main-content {
+            margin-left: 250px; /* Ancho de la barra lateral */
+            padding: 20px;
+        }
+
+        .footer {
+            position:  fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+    </style>
+   
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">Mi sitio</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-expanded="false"
+    aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+     </button>
+
+     <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Inicio <span class="sr-only">(actual)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Caracteristicas</a>
+            </li>
+
+            <li class="nav-item dropdown-toggle">
+                <a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown" role="button" data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">
+             Opciones
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Opcion 1</a>
+                <a class="dropdown-item" href="#">Opcion 2</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Opcion 1</a>
+            </div>
+            </li>
+        </ul>
+
+        <!--opciones de la derecha-->
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                    <a class="nav-link" href="#">Iniciar sesion</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">Registrarse</a>
+            </li>
+        </ul>
+     </div>
+</nav>
+</head>
+
+<body>
+
+    <!--barra lateral-->
+
+    <div class="slidebar">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Enlace 1</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">Enlace 2</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">Enlace 3</a>
+            </li>
+        </ul>
+    </div>
+
+
+    <!--contenido principal-->
+    <div class="main-content">
+        <!-- carrusel -->
+        
+            <div id="carrusel" class="carousel slide mb-4" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carrusel" data-slide-to="0" class="active"></li>
+                    <li data-target="#carrusel" data-slide-to="1"></li>
+                    <li data-target="#carrusel" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="../BOOSTRAP_PAG/569808.jpg">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h4>Primera imagen</h4>
+                            <p>Descripcion de la primera imagen.</p>
+                        </div>
+                    </div>
+    
+                    <div class="carousel-item">
+                        <img src="../BOOSTRAP_PAG/los mejores paisajes del mundo y naturaleza con cascadas, montañas, pastizales y otoño (5).jpg">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h4>Segunda imagen</h4>
+                            <p>Descripcion de la segunda imagen.</p>
+                        </div>
+                    </div>
+    
+                    <div class="carousel-item">
+                        <img src="../BOOSTRAP_PAG/paisajes naturales - naturaleza - natural free landscapes - fotos de paisajes (5).jpg">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h4>Tercera imagen</h4>
+                            <p>Descripcion de la tercera imagen.</p>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carrusel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Anterior</span>
+                </a>
+    
+                <a class="carousel-control-next" href="#carrusel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Siguiente</span>
+                </a>
+            </div>
+
+
+            <h2>Contenido principal</h2>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem laudantium itaque ullam! Ullam repudiandae voluptatibus omnis ex suscipit alias, 
+                quibusdam qui dignissimos, tempora rem laboriosam. Unde laborum fugit deserunt repellendus?</p>
+                <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam nobis velit alias a, dignissimos 
+                    molestias cupiditate fugit incidunt aliquid voluptates, perspiciatis autem, delectus voluptate necessitatibus aperiam maxime officiis praesentium asperiores.</p>
+        </div>
+    <br><br>
+
+    
+
+
+<footer class="footer">
+    &copy; Derechos reservados: <a class="text-white" href="#">Mi sitio</a>
+</footer>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</html>

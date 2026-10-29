@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REDSERV</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+            <link rel="stylesheet" href="../css/estilos.css">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        </head>
+        
+        <body>
+            <nav class="navbar navbar-expand-lg fixed-top">
+                <a class="navbar-brand" href="#">
+                    <img class="logo" src="../img/logo_d.png" alt="Logo">REDSERV
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="../index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Servicios.php">Servicios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">FAQ´S<span class="sr-only">(actual)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="ACERCA DE.HTML">Acerca de</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../login/index.html">Publicar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../login/index.html">
+                                <img class="sesion" src="../img/user.png" alt="User">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        
+
+
+
+
+
+
+
+
+    <style>
+        body {
+            background-color: #f0f0f0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+
+        .section {
+            padding: 40px;
+            background-color: #FFFFFF;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        .section-title {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            color: #0033A0;
+        }
+
+        .faq-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-section h2 {
+            color: #0033A0;
+            margin-bottom: 20px;
+        }
+
+        .faq {
+            margin-bottom: 20px;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .faq-answer {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .btn-primary {
+            background-color: #0033A0;
+            border-color: #0033A0;
+            transition: box-shadow 0.3s;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 10px 2px rgba(40, 8, 222, 0.7);
+        }
+
+        footer {
+            background-color: #0033A0;
+            color: #FFFFFF;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: #FFFFFF;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <div class="container mt-5">
+        <!-- Inicio del Apartado de FAQs -->
+        <div class="section faq-section">
+            <h2 class="section-title text-center">Preguntas Frecuentes</h2>
+            <div class="faq">
+                <div class="faq-question">
+                    <h5>¿Qué es REDSERV?</h5>
+                </div>
+                <div class="faq-answer">
+                    <p>REDSERV es un directorio de servicios diseñado para conectar a los habitantes de nuestro pueblo o
+                        municipio con profesionales y oficios locales. Ofrecemos una plataforma para que los usuarios puedan encontrar y contactar fácilmente a profesionales de diversas áreas.</p>
+                </div>
+            </div>
+            <div class="faq">
+                <div class="faq-question">
+                    <h5>¿Cómo puedo registrarme en REDSERV?</h5>
+                </div>
+                <div class="faq-answer">
+                    <p>Para registrarte en REDSERV, haz clic en el enlace de "Registro" en la parte superior de la página y sigue las instrucciones proporcionadas. Necesitarás proporcionar información básica sobre ti y tu negocio.</p>
+                </div>
+            </div>
+            <div class="faq">
+                <div class="faq-question">
+                    <h5>¿Qué tipo de servicios puedo encontrar en REDSERV?</h5>
+                </div>
+                <div class="faq-answer">
+                    <p>En REDSERV, puedes encontrar una amplia variedad de servicios, incluyendo plomeros, electricistas, mecánicos, jardineros, y muchos más. Cada perfil incluye información detallada y formas de contacto.</p>
+                </div>
+            </div>
+            <div class="faq">
+                <div class="faq-question">
+                    <h5>¿Cómo contacto a un profesional a través de REDSERV?</h5>
+                </div>
+                <div class="faq-answer">
+                    <p>Para contactar a un profesional, simplemente navega hasta su perfil en nuestro directorio y utiliza la información de contacto proporcionada. Puedes llamar, enviar un correo electrónico o utilizar cualquier otro método de contacto disponible en su perfil.</p>
+                </div>
+            </div>
+            <div class="faq">
+                <div class="faq-question">
+                    <h5>¿Es seguro usar REDSERV?</h5>
+                </div>
+                <div class="faq-answer">
+                    <p>La seguridad de nuestros usuarios es nuestra prioridad. Nos aseguramos de que todos los profesionales listados en REDSERV sean verificados y confiables. Sin embargo, siempre recomendamos a los usuarios que realicen sus propias verificaciones y tomen precauciones al contratar cualquier servicio.</p>
+                </div>
+            </div>
+        </div>
+        <br><br><br>
+        <!-- Fin del Apartado de FAQs -->
+    </div>
+
+    <!-- Pie de Página -->
+    <footer class="py-4 bg-dark text-white">
+        <div class="container text-center">
+            <p>&copy; 2024 REDSERV. Todos los derechos reservados.</p>
+            <a href="#" class="text-white">Privacidad</a> |
+            <a href="#" class="text-white">Términos</a> |
+            <a href="#" class="text-white">Contacto</a>
+        </div>
+    </footer>
+    <!-- Fin del Pie de Página -->
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-CPrJdoM/GAO7DGbcF8WcJcItZ6zn4Y3E1s04DNFsoI3wdCgOvUh3lwTWsUq+X9L1" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".faq-question").on("click", function () {
+                $(this).next(".faq-answer").slideToggle();
+            });
+        });
+    </script>
+</body>
+
+</html>

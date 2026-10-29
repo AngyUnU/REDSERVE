@@ -1,0 +1,13 @@
+# Basura de macOS
+__MACOSX/
+.DS_Store
+
+# Archivos subidos por usuarios (no versionar)
+INTEGRADORA/uploads/*
+!INTEGRADORA/uploads/doctor.jpg
+!INTEGRADORA/uploads/jardinera.webp
+!INTEGRADORA/uploads/mesero.jpg
+!INTEGRADORA/uploads/idea2.jpg
+
+# Credenciales de prueba locales
+CUENTAS_PRUEBA.txt

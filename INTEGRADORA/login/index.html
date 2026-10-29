@@ -1,0 +1,157 @@
+<?php
+session_start();
+include('conexion.php');
+if(isset($_SESSION['usuarioingresando']))
+{
+    header('Location: productos_tabla.php');
+}
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REDSERV</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="scripts.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <a class="navbar-brand" href="#">
+            <img class="logo" src="../img/logo_d.png" alt="Logo">REDSERV
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../index.html">Inicio <span class="sr-only">(actual)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Paginas/Servicios.php">Servicios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Paginas/FAQ's.html">FAQ´S</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../Paginas/ACERCA DE.HTML">Acerca de</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Publicar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <img class="sesion" src="../img/user.png" alt="User">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</head>
+
+
+
+ 
+<body>
+    <div class="FormCajaLogin">
+        <div class="FormLogin">
+            <div class="botondeintercambiar">
+                <div id="btnvai"></div>
+                <button type="button" class="botoncambiarcaja" onclick="loginvai()" id="vaibtnlogin">Login</button>
+                <button type="button" class="botoncambiarcaja" onclick="registrarvai()" id="vaibtnregistrar">Registrar</button>
+            </div>
+
+            <form action="usuario_login.php" method="post" id="frmlogin" class="grupo-entradas">
+            <h3>Iniciar Sesión</h3>
+
+            <div class="TextoCajas">Ingresar correo</div>
+            <input type="email" name="txtcorreo" class="CajaTexto" autocomplete="off" required>
+
+            <div class="TextoCajas">Ingresar password</div>
+            <input type="password" name="txtpassword" class="CajaTexto" autocomplete="off" required>
+        <div>
+        <input type="submit" value="Iniciar Sesión" class="BtnLogin" name="btningresar">
+    </div>
+</form>
+
+        <form method="post" id="frmregistrar" class="grupo-entradas" action="usuario_registrar.php">
+        <h3>Crear cuenta</h3>
+
+        <div class="TextoCajas">Ingresar nombre</div>
+        <input type="text" name="txtnombre1" class="CajaTexto" autocomplete="off" required>
+
+        <div class="TextoCajas">Ingresar correo</div>
+        <input type="email" name="txtcorreo1" class="CajaTexto" autocomplete="off" required>
+
+        <div class="TextoCajas">Ingresar password</div>
+        <input type="password" name="txtpassword1" class="CajaTexto" autocomplete="off" required>
+
+        <div>
+            <input type="submit" value="Crear nueva cuenta" class="BtnRegistrar" name="btnregistrar">
+        </div>
+        </form>
+</div>
+</div>
+</body>
+<script src="boton_formulario.js"></script>
+
+
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section about">
+            <h1 class="logo-text">Red<span>Serv</span></h1>
+            <p>
+            La pagina N1 para ofrecer tus servicios o solicitar alguno.
+            </p>
+            <div class="contact">
+                <span><i class="fas fa-phone"></i> &nbsp; 123-456-789</span>
+                <span><i class="fas fa-envelope"></i> &nbsp; info@redserv.com</span>
+            </div>
+            <div class="socials">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="footer-section links">
+            <h2>Enlaces rápidos</h2>
+            <br>
+            <ul>
+                <a href="../index.html"><li>Inicio</li></a>
+                <a href="../Paginas/Servicios.php"><li>Servicios</li></a>
+                <a href="../Paginas/FAQ's.html"><li>FAQ's</li></a>
+                <a href="../Paginas/ACERCA DE.HTML"><li>Acerca de</li></a>
+                <a href="#"><li>Publicar</li></a>
+            </ul>
+        </div>
+        <div class="footer-section contact-form">
+            <h2>Datos</h2>
+            <br>
+            <h4>RedServ companny SA de CV.</h4>
+            <h6>Calle principal</h6>
+            <h6>Gtz.Ver</h6>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; redserv.com | Diseñado por Equipo de Desarrollo
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+</html>
