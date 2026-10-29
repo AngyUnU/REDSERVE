@@ -1,11 +1,12 @@
 <?php
 include('conexion.php');
 include('categoria_tabla.php');
-$pagina = $_GET['pag'];
-$id = $_GET['msg'];
+$pagina = get_int('pag', 1);
+$id = get_int('msg');
 
-$querybuscar = mysqli_query($conn,"SELECT * FROM messages WHERE id_message = '$id'");
+$querybuscar = consulta($conn, "SELECT * FROM messages WHERE id_message = ?", 'i', $id);
 
+$mid = $mnom = $mcon = $mf = '';
 while($mostrar = mysqli_fetch_array($querybuscar))
 {
     $mid = $mostrar['id_message'];

@@ -1,7 +1,7 @@
 <?php
 include("conexion.php");
 include("user_tabla.php");
-$pagina = $_GET['pag'];
+$pagina = get_int('pag', 1);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +24,7 @@ $pagina = $_GET['pag'];
                 </tr>
                 <tr>
                     <td><b>Password: </b></td>
-                    <td><input type="text" name="txtpass" autocomplete="off" class="CajaTexto" step="any"></td>
+                    <td><input type="password" name="txtpass" autocomplete="new-password" class="CajaTexto" required></td>
                 </tr>
                 <tr>
                     <td><b>Rol: </b></td>
@@ -61,7 +61,7 @@ if(isset($_POST['btnregistrar']))
     $usrol = $_POST['txtrol'];
 
     $pass_fuerte = password_hash($uspass,PASSWORD_BCRYPT);
-    mysqli_query($conn, "INSERT INTO users(nombre_us, email, password_u, id_rol) VALUES('$usnom', '$usemail', '$pass_fuerte', '$usrol')");
+    consulta($conn, "INSERT INTO users(nombre_us, email, password_u, id_rol) VALUES (?, ?, ?, ?)", 'sssi', $usnom, $usemail, $pass_fuerte, (int)$usrol);
 
     echo "<script> alert('Usuario registrado con éxito: $pronom'); window.location='user_tabla.php' </script>";
 }

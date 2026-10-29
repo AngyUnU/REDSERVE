@@ -16,8 +16,8 @@ include('barra_lateral.php');
         }
 
         if (isset($_POST['btnBuscar'])) {
-            $buscar = mysqli_real_escape_string($conn, $_POST['txtBuscar']);
-            $sqlcat = mysqli_query($conn, "SELECT * FROM sections WHERE Nombre_sec LIKE '%$buscar%'");
+            $buscar = $_POST['txtBuscar'] ?? '';
+            $sqlcat = consulta($conn, "SELECT * FROM sections WHERE Nombre_sec LIKE ?", 's', '%' . $buscar . '%');
         } else {
             $sqlcat = mysqli_query($conn, "SELECT * FROM sections ORDER BY id_section ASC LIMIT " . (($pagina - 1) * $filasmax) . ", $filasmax");
         }
@@ -56,7 +56,7 @@ include('barra_lateral.php');
                     echo "<td style='width:24%'>
                         <a class='BotonesTeam1' href='categoria_ver.php?categoria={$mostrar['id_section']}&pag=$pagina'>&#x1F50D;</a> 
                         <a class='BotonesTeam2' href='categoria_modificar.php?categoria={$mostrar['id_section']}&pag=$pagina'>&#128397;</a> 
-                        <a class='BotonesTeam3' href='categoria_eliminar.php?categoria={$mostrar['id_section']}&pag=$pagina' onClick=\"return confirm('¿Estás seguro de eliminar la categoría {$mostrar['Nombre_sec']}?')\">&#10006;</a>
+                        <form method='post' action='categoria_eliminar.php?pag=$pagina' style='display:inline' onsubmit=\"return confirm('¿Estás seguro de eliminar la categoría ' + this.dataset.nombre + '?')\" data-nombre='" . e($mostrar['Nombre_sec']) . "'>" . csrf_field() . "<input type='hidden' name='id' value='" . (int)$mostrar['id_section'] . "'><button type='submit' class='BotonesTeam3' title='Eliminar' style='border:none;background:none;cursor:pointer;padding:0'>&#10006;</button></form>
                     </td>";  
                     echo "</tr>";
                 }

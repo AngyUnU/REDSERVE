@@ -2,7 +2,7 @@
 include('conexion.php');
 include('categoria_tabla.php');
 
-$pagina = $_GET['pag'];
+$pagina = get_int('pag', 1);
 ?>
 <html>
 <head>
@@ -44,7 +44,7 @@ if(isset($_POST['btnregistrar']))
     $vainom = $_POST['txtnom'];
     $vaides = $_POST['txtdes'];
 
-    $queryadd = mysqli_query($conn,"INSERT INTO sections(Nombre_sec,Description) VALUES('$vainom','$vaides')");
+    $queryadd = consulta($conn, "INSERT INTO sections(Nombre_sec, Description) VALUES (?, ?)", 'ss', $vainom, $vaides);
 
     if(!$queryadd)
     {

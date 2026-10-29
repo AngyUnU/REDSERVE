@@ -1,11 +1,12 @@
 <?php
 include('conexion.php');
 include('categoria_tabla.php');
-$pagina = $_GET['pag'];
-$id = $_GET['categoria'];
+$pagina = get_int('pag', 1);
+$id = get_int('categoria');
 
-$querybuscar = mysqli_query($conn,"SELECT * FROM sections WHERE id_section = '$id'");
+$querybuscar = consulta($conn, "SELECT * FROM sections WHERE id_section = ?", 'i', $id);
 
+$catid = $catnom = $catdes = '';
 while($mostrar = mysqli_fetch_array($querybuscar))
 {
     $catid = $mostrar['id_section'];

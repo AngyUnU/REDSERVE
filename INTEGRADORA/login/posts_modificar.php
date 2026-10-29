@@ -3,11 +3,12 @@ include("conexion.php");
 include("posts_tabla.php");
 
 
-$pagina = $_GET['pag'];
-$id = $_GET['id'];
+$pagina = get_int('pag', 1);
+$id = get_int('id');
 
 
-$querybuscar = mysqli_query($conn, "SELECT * FROM posts WHERE id_post = '$id'");
+$querybuscar = consulta($conn, "SELECT * FROM posts WHERE id_post = ?", 'i', $id);
+$proid = $pronom = $prodes = $propun = $procat = '';
 while($mostrar = mysqli_fetch_array($querybuscar))
 {  
    $proid = $mostrar['id_post'];
@@ -91,7 +92,7 @@ if(isset($_POST['btnregistrar']))
    $propun1    = $_POST['txtpre'];
    $procat1    = $_POST['txtcat'];
     
-$querymodificar = mysqli_query($conn, "UPDATE posts SET nombre_of='$pronom1',descripcion='$prodes1',puntuacion='$propun1',id_section='$procat1' WHERE id_post = '$proid1'");
+$querymodificar = consulta($conn, "UPDATE posts SET nombre_of=?, descripcion=?, puntuacion=?, id_section=? WHERE id_post=?", 'ssiii', $pronom1, $prodes1, (int)$propun1, (int)$procat1, (int)$proid1);
 echo "<script>window.location= 'posts_tabla.php?pag=$pagina' </script>";
   
 }

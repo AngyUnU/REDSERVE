@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../includes/seguridad.php';
+require_login();
 include('../php/conexion.php');
 ?>
 <!DOCTYPE html>
@@ -54,6 +56,10 @@ include('../php/conexion.php');
             margin: 0;
             padding: 20px;
         }
+     
+
+
+
 
         .container {
             max-width: 600px;
@@ -63,6 +69,8 @@ include('../php/conexion.php');
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin-top: 4%;
+            animation: fadeIn 1s ease-in-out;
+
         }
 
         h1 {
@@ -79,23 +87,35 @@ include('../php/conexion.php');
         textarea,
         select {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s;
         }
+        input[type="text"]:focus,
+input[type="file"]:focus,
+textarea:focus,
+select:focus {
+    border-color: #007BFF;
+}
+
 
         button {
             padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            background-color: #007BFF;
-            color: white;
-            cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
         }
 
         button:hover {
             background-color: #0056b3;
+            transform: scale(1.05);
+
         }
 
 </style>

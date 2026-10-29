@@ -16,8 +16,8 @@ include('barra_lateral.php');
         }
 
         if (isset($_POST['btnBuscar'])) {
-            $buscar = mysqli_real_escape_string($conn, $_POST['txtBuscar']);
-            $sqlcat = mysqli_query($conn, "SELECT * FROM bitacora WHERE descripcion LIKE '%$buscar%'");
+            $buscar = $_POST['txtBuscar'] ?? '';
+            $sqlcat = consulta($conn, "SELECT * FROM bitacora WHERE descripcion LIKE ?", 's', '%' . $buscar . '%');
         } else {
             $sqlcat = mysqli_query($conn, "SELECT * FROM bitacora ORDER BY id_bitacora ASC LIMIT " . (($pagina - 1) * $filasmax) . ", $filasmax");
         }
