@@ -1,10 +1,10 @@
 <?php
 include('conexion.php');
 include("barra_lateral.php");
-$usuarioingresado = $_SESSION['usuarioingresando'];
-$pagina = $_GET['pag'];
-$id = $_GET['categoria'];
+$pagina = get_int('pag', 1);
+csrf_check();                      // solo POST con token valido
+$id = (int)($_POST['id'] ?? 0);
 
-mysqli_query($conn, "DELETE FROM sections WHERE id_section='$id'");
+consulta($conn, "DELETE FROM sections WHERE id_section = ?", 'i', $id);
 header("Location: categoria_tabla.php?pag=$pagina");
 ?>

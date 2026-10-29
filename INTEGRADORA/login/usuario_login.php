@@ -1,38 +1,29 @@
 <?php
-session_start();
+require_once __DIR__ . '/../includes/seguridad.php';
 include('conexion.php');
 
-$correo= $_POST["txtcorreo"];
-$pass = $_POST["txtpassword"];
+$correo = trim($_POST['txtcorreo'] ?? '');
+$pass   = $_POST['txtpassword'] ?? '';
 
-$buscandousu = mysqli_query($conn,"SELECT * FROM users WHERE email = '$correo'");
-$nr = mysqli_num_rows($buscandousu);
-$mostrar=mysqli_fetch_array($buscandousu);
+$stmt = mysqli_prepare($conn, "SELECT id_user, nombre_us, password_u, id_rol FROM users WHERE email = ?");
+mysqli_stmt_bind_param($stmt, 's', $correo);
+mysqli_stmt_execute($stmt);
+$usuario = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
 
-if($nr == 1 && (password_verify($pass,$mostrar['password_u'])))
-{
-    session_start();
-    $_SESSION['id_rol']=$mostrar['id_rol'];
+if ($usuario && password_verify($pass, $usuario['password_u'])) {
+    session_regenerate_id(true);           // evita fijacion de sesion
+    $_SESSION['id_user'] = (int)$usuario['id_user'];
+    $_SESSION['nombre']  = $usuario['nombre_us'];
+    $_SESSION['id_rol']  = (int)$usuario['id_rol'];
 
-    // Redirigimos según el rol
-    switch($_SESSION['id_rol']) {
-        
-        case '1': 
-            header("Location: posts_tabla.php");
-            break;
-        case '2': 
-            header("Location: posts_tabla.php");
-            break;
-        default: // user normal
-            header("Location: ../Paginas/publicar.php");
-            break;
+    if (in_array($_SESSION['id_rol'], [1, 2], true)) {
+        header('Location: posts_tabla.php');
+    } else {
+        header('Location: ../Paginas/publicar.php');
     }
-
-
-
+    exit;
 }
-else if ($nr == 0)
-{
-    echo "<script> alert('Usuario no existe');window.location='index.php' </script>";
-}
-?>
+
+// Mensaje generico: no revela si el correo existe
+header('Location: index.html?error=login');
+exit;

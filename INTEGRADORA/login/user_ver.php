@@ -1,20 +1,19 @@
 <?php
 include('conexion.php');
 include('user_tabla.php');
-$pagina = $_GET['pag'];
-$id = $_GET['user'];
+$pagina = get_int('pag', 1);
+$id = get_int('user');
 
 
-$querybuscar = mysqli_query($conn, "SELECT u.id_user,u.nombre_us,u.email,u.password_u, r.Rol from 
-users u, roles r WHERE u.id_rol=r.id_rol and u.id_user = '$id'");
+$querybuscar = consulta($conn, "SELECT u.id_user,u.nombre_us,u.email, r.Rol FROM users u JOIN roles r ON u.id_rol=r.id_rol WHERE u.id_user = ?", 'i', $id);
 
 
+$usid = $usnom = $usemail = $usrol = '';
 while($mostrar = mysqli_fetch_array($querybuscar))
 {
     $usid = $mostrar['id_user'];
     $usnom = $mostrar['nombre_us'];
     $usemail = $mostrar['email'];
-    $uspass = $mostrar['password_u'];
     $usrol = $mostrar['Rol'];
 }
 ?>
@@ -42,10 +41,6 @@ while($mostrar = mysqli_fetch_array($querybuscar))
                 </tr>
                 <tr>
 
-                <tr>
-                    <td><b>Password:</b></td>
-                    <td><?php echo $uspass ?></td>
-                </tr>
                 <tr>
 
                 <tr>

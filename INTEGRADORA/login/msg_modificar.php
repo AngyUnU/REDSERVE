@@ -2,11 +2,12 @@
 include('conexion.php');
 include("msg_tabla.php");
 
-$pagina = $_GET['pag'];
-$id = $_GET['msg'];
+$pagina = get_int('pag', 1);
+$id = get_int('msg');
 
-$querybuscar = mysqli_query($conn, "SELECT * FROM messages WHERE id_message = '$id'");
+$querybuscar = consulta($conn, "SELECT * FROM messages WHERE id_message = ?", 'i', $id);
 
+$mid = $mnom = $mcon = '';
 while($mostrar = mysqli_fetch_array($querybuscar))
 {
     $mid = $mostrar['id_message'];
@@ -58,7 +59,7 @@ if(isset($_POST['btnmodificar']))
     $nombre = $_POST['txtnombre'];
     $des = $_POST['txtdes'];
 
-    $querymodificar = mysqli_query($conn, "UPDATE messages SET usuario_n='$nombre', contenido='$des' WHERE id_message = '$id'");
+    $querymodificar = consulta($conn, "UPDATE messages SET usuario_n=?, contenido=? WHERE id_message=?", 'ssi', $nombre, $des, (int)$id);
     #en la parte de la variable página es a donde se va a dirigir
     echo "<script>window.location= 'msg_tabla.php?pag=$pagina'</script>";
 }

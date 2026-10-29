@@ -16,8 +16,8 @@ include('barra_lateral.php');
         }
 
         if (isset($_POST['btnBuscar'])) {
-            $buscar = mysqli_real_escape_string($conn, $_POST['txtBuscar']);
-            $sqlcat = mysqli_query($conn, "SELECT * FROM messages WHERE contenido LIKE '%$buscar%'");
+            $buscar = $_POST['txtBuscar'] ?? '';
+            $sqlcat = consulta($conn, "SELECT * FROM messages WHERE contenido LIKE ?", 's', '%' . $buscar . '%');
         } else {
             $sqlcat = mysqli_query($conn, "SELECT * FROM messages ORDER BY id_message ASC LIMIT " . (($pagina - 1) * $filasmax) . ", $filasmax");
         }
@@ -58,7 +58,7 @@ include('barra_lateral.php');
                     echo "<td style='width:24%'>
                         <a class='BotonesTeam1' href='msg_ver.php?msg={$mostrar['id_message']}&pag=$pagina'>&#x1F50D;</a> 
                         <a class='BotonesTeam2' href='msg_modificar.php?msg={$mostrar['id_message']}&pag=$pagina'>&#128397;</a> 
-                        <a class='BotonesTeam3' href='msg_eliminar.php?msg={$mostrar['id_message']}&pag=$pagina' onClick=\"return confirm('¿Estás seguro de eliminar el mensaje de {$mostrar['usuario_n']}?')\">&#10006;</a>
+                        <form method='post' action='msg_eliminar.php?pag=$pagina' style='display:inline' onsubmit=\"return confirm('¿Estás seguro de eliminar el mensaje de ' + this.dataset.nombre + '?')\" data-nombre='" . e($mostrar['usuario_n']) . "'>" . csrf_field() . "<input type='hidden' name='id' value='" . (int)$mostrar['id_message'] . "'><button type='submit' class='BotonesTeam3' title='Eliminar' style='border:none;background:none;cursor:pointer;padding:0'>&#10006;</button></form>
                     </td>";  
                     echo "</tr>";
                 }

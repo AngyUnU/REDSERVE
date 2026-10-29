@@ -3,11 +3,12 @@ include("conexion.php");
 include("user_tabla.php");
 
 
-$pagina = $_GET['pag'];
-$id = $_GET['user'];
+$pagina = get_int('pag', 1);
+$id = get_int('user');
 
 
-$querybuscar = mysqli_query($conn, "SELECT * FROM users WHERE id_user = '$id'");
+$querybuscar = consulta($conn, "SELECT * FROM users WHERE id_user = ?", 'i', $id);
+$usid = $usnom = $usemail = $uspass = $usrol = '';
 while($mostrar = mysqli_fetch_array($querybuscar))
 {  
    $usid = $mostrar['id_user'];
@@ -42,7 +43,7 @@ while($mostrar = mysqli_fetch_array($querybuscar))
 <tr>
 <td><b>Password: </b></td>
 
-<td><input class="CajaTexto" type="text" step="any" name="txtpass" value="<?php echo "";?>" required ></td>
+<td><input class="CajaTexto" type="password" name="txtpass" value="" autocomplete="new-password" placeholder="Dejar vac&iacute;o para no cambiarla"></td>
 </tr>
 <tr>
 <td><b>Rol: </b></td>
@@ -93,9 +94,13 @@ if(isset($_POST['btnregistrar']))
    $uspass1    = $_POST['txtpass'];
    $usrol1    = $_POST['txtrol'];
 
-   $pass_fuerte = password_hash($uspass1,PASSWORD_BCRYPT);
-  
-$querymodificar = mysqli_query($conn, "UPDATE users SET nombre_us='$usnom1',email='$usemail1',password_u='$pass_fuerte',id_rol='$usrol' WHERE id_user = '$usid1'");
+   if ($uspass1 !== '') {
+       // Solo se cambia si el administrador escribe una nueva
+       $pass_fuerte = password_hash($uspass1, PASSWORD_BCRYPT);
+       $querymodificar = consulta($conn, "UPDATE users SET nombre_us=?, email=?, password_u=?, id_rol=? WHERE id_user=?", 'sssii', $usnom1, $usemail1, $pass_fuerte, (int)$usrol1, (int)$usid1);
+   } else {
+       $querymodificar = consulta($conn, "UPDATE users SET nombre_us=?, email=?, id_rol=? WHERE id_user=?", 'ssii', $usnom1, $usemail1, (int)$usrol1, (int)$usid1);
+   }
 echo "<script>window.location= 'user_tabla.php?pag=$pagina' </script>";
 
 }

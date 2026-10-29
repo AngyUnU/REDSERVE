@@ -2,7 +2,7 @@
 include('conexion.php');
 include('msg_tabla.php');
 
-$pagina = $_GET['pag'];
+$pagina = get_int('pag', 1);
 ?>
 <html>
 <head>
@@ -45,7 +45,7 @@ if(isset($_POST['btnregistrar']))
     $vainom = $_POST['txtnom'];
     $vaides = $_POST['txtdes'];
    
-    $queryadd = mysqli_query($conn,"INSERT INTO messages(usuario_n,contenido) VALUES('$vainom','$vaides')");
+    $queryadd = consulta($conn, "INSERT INTO messages(usuario_n, contenido) VALUES (?, ?)", 'ss', $vainom, $vaides);
 
     if(!$queryadd)
     {

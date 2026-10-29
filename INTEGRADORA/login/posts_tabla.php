@@ -10,18 +10,17 @@ include("barra_lateral.php");
 $filasmax = 7;
 if (isset($_GET['pag']))
    {
-       $pagina = $_GET['pag'];
+       $pagina = max(1, (int)$_GET['pag']);
    } else
    {
        $pagina = 1;
    }
 if(isset($_POST['btnbuscar']))
 {
-$buscar = $_POST['txtbuscar'];
+$buscar = $_POST['txtbuscar'] ?? '';
 
 
-$sqlpost = mysqli_query($conn, "SELECT p.id_post,p.nombre_of,p.descripcion,p.puntuacion,s.Nombre_sec
-FROM posts p, sections s where p.id_section=s.id_section and descripcion like '".$buscar."%'");
+$sqlpost = consulta($conn, "SELECT p.id_post,p.nombre_of,p.descripcion,p.puntuacion,s.Nombre_sec FROM posts p JOIN sections s ON p.id_section=s.id_section WHERE p.descripcion LIKE ?", 's', $buscar . '%');
 
 
 }
@@ -71,7 +70,7 @@ FROM posts p, sections s where  p.id_section=s.id_section ORDER BY p.id_post ASC
            echo "<td style='width:24%'>
            <a class='BotonesTeam1' href=\"posts_ver.php?id=$mostrar[id_post]&pag=$pagina\">&#x1F50D;</a>
            <a class='BotonesTeam2' href=\"posts_modificar.php?id=$mostrar[id_post]&pag=$pagina\">&#128397;</a>
-           <a class='BotonesTeam3' href=\"posts_eliminar.php?id=$mostrar[id_post]&pag=$pagina\" onClick=\"return confirm('¿Estás seguro de eliminar el post de $mostrar[nombre_of]?')\">&#10006;</a>
+           <form method='post' action='posts_eliminar.php?pag=$pagina' style='display:inline' onsubmit=\"return confirm('¿Estás seguro de eliminar el post de ' + this.dataset.nombre + '?')\" data-nombre='" . e($mostrar['nombre_of']) . "'>" . csrf_field() . "<input type='hidden' name='id' value='" . (int)$mostrar['id_post'] . "'><button type='submit' class='BotonesTeam3' title='Eliminar' style='border:none;background:none;cursor:pointer;padding:0'>&#10006;</button></form>
            </td>"; 
           
        }
@@ -90,7 +89,7 @@ FROM posts p, sections s where  p.id_section=s.id_section ORDER BY p.id_post ASC
 if (isset($_GET['pag'])) {
 if ($_GET['pag'] > 1) {
 ?>
-<a class="BotonesTeam4" href="posts_tabla.php?pag=<?php echo $_GET['pag'] - 1; ?>">Anterior</a>
+<a class="BotonesTeam4" href="posts_tabla.php?pag=<?php echo $pagina - 1; ?>">Anterior</a>
 <?php
 }
 else
@@ -111,7 +110,7 @@ else
 if (isset($_GET['pag'])) {
 if ((($pagina) * $filasmax) < $maxusutabla) {
 ?>
-<a class="BotonesTeam4" href="posts_tabla.php?pag=<?php echo $_GET['pag'] + 1; ?>">Siguiente</a>
+<a class="BotonesTeam4" href="posts_tabla.php?pag=<?php echo $pagina + 1; ?>">Siguiente</a>
 <?php
 } else {
 ?>

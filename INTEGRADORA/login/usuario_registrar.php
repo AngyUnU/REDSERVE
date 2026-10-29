@@ -9,7 +9,7 @@ $pass = $_POST["txtpassword1"];
 $rol=0;
 $pass_fuerte = password_hash($pass,PASSWORD_BCRYPT);
 
-$insertarusu = mysqli_query($conn, "INSERT INTO users(nombre_us,email,password_u,id_rol) VALUES ('$nombre','$correo','$pass_fuerte','$rol')");
+$insertarusu = consulta($conn, "INSERT INTO users(nombre_us, email, password_u, id_rol) VALUES (?, ?, ?, ?)", 'sssi', $nombre, $correo, $pass_fuerte, $rol);
 
 if(!$insertarusu)
 {

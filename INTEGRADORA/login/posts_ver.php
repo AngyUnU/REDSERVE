@@ -1,14 +1,14 @@
 <?php
 include("conexion.php");
 include("posts_tabla.php");
-$pagina = $_GET['pag'];
-$id = $_GET['id'];
+$pagina = get_int('pag', 1);
+$id = get_int('id');
 
-$querybuscar = mysqli_query($conn, "SELECT p.id_post, p.Nombre_of, p.descripcion, p.puntuacion, s.Nombre_sec from
- posts p, sections s WHERE p.id_section = s.id_section and p.id_post = '$id'");
-
+$querybuscar = consulta($conn, "SELECT p.id_post, p.Nombre_of, p.descripcion, p.puntuacion, s.Nombre_sec FROM posts p JOIN sections s ON p.id_section = s.id_section WHERE p.id_post = ?", 'i', $id);
 
 
+
+$proid = $pronom = $prodes = $propun = $procat = '';
 while($mostrar = mysqli_fetch_array($querybuscar))
 {
     $proid = $mostrar['id_post'];

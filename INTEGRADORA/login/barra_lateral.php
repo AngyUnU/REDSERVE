@@ -1,6 +1,7 @@
 <?php
-session_start();
-include('conexion.php');
+require_once __DIR__ . '/../includes/seguridad.php';
+require_admin();
+include_once('conexion.php');
 
 ?>
 

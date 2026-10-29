@@ -1,7 +1,7 @@
 <?php
 include("conexion.php");
 include("posts_tabla.php");
-$pagina = $_GET['pag'];
+$pagina = get_int('pag', 1);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +60,7 @@ if(isset($_POST['btnregistrar']))
     $propun = $_POST['txtpre'];
     $procat = $_POST['txtcat'];
 
-    mysqli_query($conn, "INSERT INTO posts(nombre_of, descripcion, puntuacion, id_section) VALUES('$pronom', '$prodes', '$propun', '$procat')");
+    consulta($conn, "INSERT INTO posts(nombre_of, descripcion, puntuacion, id_section) VALUES (?, ?, ?, ?)", 'ssii', $pronom, $prodes, (int)$propun, (int)$procat);
 
     echo "<script> alert('Post registrado con éxito: $pronom'); window.location='posts_tabla.php' </script>";
 }

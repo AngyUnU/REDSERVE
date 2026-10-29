@@ -103,6 +103,20 @@ if(isset($_SESSION['usuarioingresando']))
 </div>
 </body>
 <script src="boton_formulario.js"></script>
+<script>
+// Muestra el resultado del login sin revelar detalles internos
+(function () {
+    var err = new URLSearchParams(location.search).get('error');
+    var textos = { login: 'Correo o contrase\u00f1a incorrectos.', sesion: 'Inicia sesi\u00f3n para continuar.' };
+    if (textos[err]) {
+        var aviso = document.createElement('div');
+        aviso.textContent = textos[err];
+        aviso.style.cssText = 'background:#fdecea;color:#b71c1c;border:1px solid #f5c2c0;padding:10px 14px;margin:8px 0;border-radius:6px;font-weight:bold;';
+        var form = document.getElementById('frmlogin');
+        form.insertBefore(aviso, form.querySelector('h3').nextSibling);
+    }
+})();
+</script>
 
 
 

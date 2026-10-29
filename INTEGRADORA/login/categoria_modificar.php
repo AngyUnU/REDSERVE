@@ -2,11 +2,12 @@
 include('conexion.php');
 include("categoria_tabla.php");
 
-$pagina = $_GET['pag'];
-$id = $_GET['categoria'];
+$pagina = get_int('pag', 1);
+$id = get_int('categoria');
 
-$querybuscar = mysqli_query($conn, "SELECT * FROM sections WHERE id_section = '$id'");
+$querybuscar = consulta($conn, "SELECT * FROM sections WHERE id_section = ?", 'i', $id);
 
+$catid = $catnom = $catdes = '';
 while($mostrar = mysqli_fetch_array($querybuscar))
 {
     $catid = $mostrar['id_section'];
@@ -58,7 +59,7 @@ if(isset($_POST['btnmodificar']))
     $nombre = $_POST['txtnombre'];
     $des = $_POST['txtdes'];
 
-    $querymodificar = mysqli_query($conn, "UPDATE sections SET Nombre_sec='$nombre', Description='$des' WHERE id_section = '$id'");
+    $querymodificar = consulta($conn, "UPDATE sections SET Nombre_sec=?, Description=? WHERE id_section=?", 'ssi', $nombre, $des, (int)$id);
     #en la parte de la variable página es a donde se va a dirigir
     echo "<script>window.location= 'categoria_tabla.php?pag=$pagina'</script>";
 }

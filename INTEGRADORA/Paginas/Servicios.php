@@ -86,15 +86,21 @@
 
             // Construct SQL query
             $sql = "SELECT p.nombre_of, p.imagen, p.descripcion FROM posts p JOIN sections s ON p.id_section = s.id_section WHERE 1=1";
-
-            if ($category_filter) {
-                $sql .= " AND s.Nombre_sec = '" . $conn->real_escape_string($category_filter) . "'";
+            $tipos = '';
+            $params = [];
+            if ($category_filter !== '') {
+                $sql .= " AND s.Nombre_sec = ?";
+                $tipos .= 's';
+                $params[] = $category_filter;
             }
-            if ($search_query) {
-                $sql .= " AND (p.nombre_of LIKE '%" . $conn->real_escape_string($search_query) . "%'   OR p.descripcion LIKE '%" . $conn->real_escape_string($search_query) . "%')";
+            if ($search_query !== '') {
+                $sql .= " AND (p.nombre_of LIKE ? OR p.descripcion LIKE ?)";
+                $tipos .= 'ss';
+                $params[] = '%' . $search_query . '%';
+                $params[] = '%' . $search_query . '%';
             }
 
-            $result = $conn->query($sql);
+            $result = consulta($conn, $sql, $tipos, ...$params);
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {

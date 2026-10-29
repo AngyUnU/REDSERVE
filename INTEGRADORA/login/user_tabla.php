@@ -16,14 +16,13 @@ include('barra_lateral.php');
         }
 
         if (isset($_POST['btnBuscar'])) {
-            $buscar = mysqli_real_escape_string($conn, $_POST['txtBuscar']);
+            $buscar = $_POST['txtBuscar'] ?? '';
            
-        $sqluser = mysqli_query($conn, "SELECT u.id_user,u.nombre_us,u.email,u.password_u, r.Rol
-        FROM users u, roles r where u.id_rol=r.id_rol  and u.nombre_us like '".$buscar."%'");
+        $sqluser = consulta($conn, "SELECT u.id_user,u.nombre_us,u.email, r.Rol FROM users u JOIN roles r ON u.id_rol=r.id_rol WHERE u.nombre_us LIKE ?", 's', $buscar . '%');
 
         } else {
 
-            $sqluser = mysqli_query($conn, "SELECT u.id_user,u.nombre_us,u.email,u.password_u, r.Rol
+            $sqluser = mysqli_query($conn, "SELECT u.id_user,u.nombre_us,u.email, r.Rol
             FROM users u, roles r where u.id_rol=r.id_rol  ORDER BY u.id_user ASC LIMIT " . (($pagina -1) * $filasmax)  . "," . $filasmax);
         }
 
@@ -49,7 +48,6 @@ include('barra_lateral.php');
                     <th>Id</th>
                     <th>Nombre</th>
                     <th>Email</th>
-                    <th>Password</th>
                     <th>Rol</th>
                     <th>Acción</th>
                 </tr>
@@ -60,12 +58,11 @@ include('barra_lateral.php');
                     echo "<td>" . $mostrar['id_user'] . "</td>";
                     echo "<td>" . $mostrar['nombre_us'] . "</td>";
                     echo "<td>" . $mostrar['email'] . "</td>";
-                    echo "<td>" . $mostrar['password_u'] . "</td>";
                     echo "<td>" . $mostrar['Rol'] . "</td>"; 
                     echo "<td style='width:24%'>
                         <a class='BotonesTeam1' href='user_ver.php?user={$mostrar['id_user']}&pag=$pagina'>&#x1F50D;</a> 
                         <a class='BotonesTeam2' href='user_modificar.php?user={$mostrar['id_user']}&pag=$pagina'>&#128397;</a> 
-                        <a class='BotonesTeam3' href='user_eliminar.php?user={$mostrar['id_user']}&pag=$pagina' onClick=\"return confirm('¿Estás seguro de eliminar al usuario {$mostrar['nombre_us']}?')\">&#10006;</a>
+                        <form method='post' action='user_eliminar.php?pag=$pagina' style='display:inline' onsubmit=\"return confirm('¿Estás seguro de eliminar al usuario ' + this.dataset.nombre + '?')\" data-nombre='" . e($mostrar['nombre_us']) . "'>" . csrf_field() . "<input type='hidden' name='id' value='" . (int)$mostrar['id_user'] . "'><button type='submit' class='BotonesTeam3' title='Eliminar' style='border:none;background:none;cursor:pointer;padding:0'>&#10006;</button></form>
                     </td>";  
                     echo "</tr>";
                 }

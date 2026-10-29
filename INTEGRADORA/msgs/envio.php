@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../includes/seguridad.php';
+require_login();
 include('../php/conexion.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -15,7 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: mensajes.php");
         exit(); // Asegura que el script se detenga después de la redirección
     } else {
-        echo "Error: " . $stmt->error;
+        error_log('REDSERV - ' . $stmt->error);
+        echo "No se pudo guardar. Intenta de nuevo.";
     }
 
     $stmt->close();
